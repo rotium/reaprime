@@ -187,8 +187,10 @@ class WebViewCompatibilityChecker {
         );
       }
 
-      // Check Android version (require Android 10 / API 29+)
-      if (sdkInt < 29) {
+      // Check Android version (require Android 9 / API 28+; matches the
+      // app's build minSdk). Older devices with a flaky WebView are still
+      // caught by the runtime rendering test below.
+      if (sdkInt < 28) {
         final reason =
             'Android version too old for stable WebView: $androidVersion (SDK $sdkInt)';
         _log.warning(reason);
